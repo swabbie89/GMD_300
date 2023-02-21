@@ -278,11 +278,17 @@ MonoBehaviour:
   moveSpeed: 5
   jumpSpeed: 10
   groundCheckRadius: 0.25
+  dashSpeed: 8
+  dashLength: 0.5
+  dashCoolDown: 1
+  dashInvincibility: 0.5
   groundCheck: {fileID: 5943277314733909423}
   whatIsGround:
     serializedVersion: 2
     m_Bits: 256
   jumpSound: {fileID: 296924480}
+  respawnPosition: {x: 0, y: 0, z: 0}
+  anim: {fileID: 5943277315449047862}
 --- !u!50 &5943277315449047860
 Rigidbody2D:
   serializedVersion: 4
@@ -300,7 +306,7 @@ Rigidbody2D:
   m_AngularDrag: 0.05
   m_GravityScale: 1
   m_Material: {fileID: 0}
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
