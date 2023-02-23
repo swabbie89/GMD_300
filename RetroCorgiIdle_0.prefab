@@ -167,7 +167,6 @@ GameObject:
   m_Component:
   - component: {fileID: 5943277315449047848}
   - component: {fileID: 5943277315449047863}
-  - component: {fileID: 5943277315449047862}
   - component: {fileID: 5943277315449047861}
   - component: {fileID: 5943277315449047860}
   - component: {fileID: 176251891}
@@ -244,25 +243,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!95 &5943277315449047862
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5943277315449047859}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: c438e6c807b116e4297748d6c40310a5, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!114 &5943277315449047861
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -288,7 +268,7 @@ MonoBehaviour:
     m_Bits: 256
   jumpSound: {fileID: 296924480}
   respawnPosition: {x: 0, y: 0, z: 0}
-  anim: {fileID: 5943277315449047862}
+  anim: {fileID: 0}
 --- !u!50 &5943277315449047860
 Rigidbody2D:
   serializedVersion: 4
