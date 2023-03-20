@@ -10,8 +10,7 @@ public class PlayerController : MonoBehaviour
     public LayerMask whatIsGround;
     public AudioSource jumpSound;
     [SerializeField] private Rigidbody2D rb;
-    [SerializeField] private TrailRenderer tr;
-
+   
     private bool canDash = true;
     private bool isDashing;
     private float dashingPower = 5f;
@@ -68,6 +67,8 @@ public class PlayerController : MonoBehaviour
             StartCoroutine(Dash());
         }
 
+        
+
 
 
         
@@ -87,8 +88,7 @@ public class PlayerController : MonoBehaviour
         isDashing = true;
         float originalGravity = rb.gravityScale;
         rb.gravityScale = 0f;
-        rb.velocity = new Vector2(transform.localScale.x * dashingPower, 0f);
-        tr.emitting = true;
+        rb.velocity = new Vector2(transform.localScale.x * dashingPower, 0f); 
         yield return new WaitForSeconds(dashingTime);
         rb.gravityScale = originalGravity;
         isDashing = false;
