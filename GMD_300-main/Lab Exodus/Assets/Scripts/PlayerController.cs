@@ -5,49 +5,102 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     public float moveSpeed, jumpSpeed, groundCheckRadius;
-    private Rigidbody2D myRB;
     private bool isGrounded;
     public Transform groundCheck;
     public LayerMask whatIsGround;
     public AudioSource jumpSound;
+    [SerializeField] private Rigidbody2D rb;
+   
+    private bool canDash = true;
+    private bool isDashing;
+    private float dashingPower = 5f;
+    private float dashingTime = 0.2f;
+    private float dashingCooldown = 1f;
+
+
+
+    
+
+    
+
+
     
     private void Start()
     {
-        myRB = GetComponent<Rigidbody2D>();
+        rb = GetComponent<Rigidbody2D>();
+        
+        
     }
 
     private void Update()
     {
+        if (isDashing)
+        {
+            return;
+        }
         //Player ground check
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, whatIsGround);
 
         //Player movement
         if (Input.GetAxisRaw("Horizontal") > 0f)
         {
-            myRB.velocity = new Vector3(moveSpeed, myRB.velocity.y, 0f);
+            rb.velocity = new Vector3(moveSpeed, rb.velocity.y, 0f);
         }
         else if (Input.GetAxisRaw("Horizontal") < 0f)
         {
-            myRB.velocity = new Vector3(-moveSpeed, myRB.velocity.y, 0f);
+            rb.velocity = new Vector3(-moveSpeed, rb.velocity.y, 0f);
         }
         else
         {
-            myRB.velocity = new Vector3(0f, myRB.velocity.y, 0f);
+            rb.velocity = new Vector3(0f, rb.velocity.y, 0f);
         }
 
         //Player jump
         if (Input.GetButtonDown("Jump") && isGrounded)
         {
-            myRB.velocity = new Vector3(myRB.velocity.x, jumpSpeed, 0f);
+            rb.velocity = new Vector3(rb.velocity.x, jumpSpeed, 0f);
             jumpSound.Play();
+        }
+
+        if(Input.GetKeyDown(KeyCode.H) && canDash)
+        {
+            StartCoroutine(Dash());
+        }
+
+        
+
+
+
+        
+    }
+
+    private void FixedUpdate()
+    {
+        if (isDashing)
+        {
+            return;
         }
     }
 
-    void OnTriggerEnter2D(Collider2D other)
+    private IEnumerator Dash()
     {
-        if(other.tag == "Kill Plane")
-        {
-            gameObject.SetActive(false);
-        }
+        canDash = false;
+        isDashing = true;
+        float originalGravity = rb.gravityScale;
+        rb.gravityScale = 0f;
+        rb.velocity = new Vector2(transform.localScale.x * dashingPower, 0f); 
+        yield return new WaitForSeconds(dashingTime);
+        rb.gravityScale = originalGravity;
+        isDashing = false;
+        yield return new WaitForSeconds(dashingCooldown);
+        canDash = true;
     }
+
+    
+
+
+
+
+
+
 }
